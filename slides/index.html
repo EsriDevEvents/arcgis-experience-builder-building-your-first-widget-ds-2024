@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>ArcGIS Experience Builder: Building Your First Widget</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/black.css">
+
+  <!-- Override the Reveal theme variables: -->
+  <!-- https://github.com/hakimel/reveal.js/blob/master/css/theme/template/exposer.scss -->
+  <style type="text/css">
+    :root {
+      /* Color from slides */
+      --r-background-color: #000;
+
+      /* Main text color */
+      --r-main-color: #fff;
+
+      /* Arial font is recommended */
+      --r-heading-font: Arial, Helvetica Neue, Helvetica, sans-serif;
+      --r-main-font: Arial, Helvetica Neue, Helvetica, sans-serif;
+
+      /* For consistency with the template: */
+      --r-heading-font-weight: normal;
+      --r-heading-text-transform: none;
+      --r-heading-text-shadow: none;
+
+      /* Section subheader color per theme */
+      --r-section-subhead-color: #5DD9B6;
+    }
+  </style>
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="img/2024/devsummit/1.jpg" data-background-size="contain">
+        <h1 style="text-align: left; font-size: 60px">ArcGIS Experience Builder: Building Your First Widget</h1>
+        <p style="
+              text-align: left;
+              font-size: 30px;
+              color: var(--r-section-subhead-color);
+            ">
+          <b>Shawn Goulet (Esri PS | Atlantic Delivery Center)</b>
+        </p>
+        <p style="text-align: left; font-size: 30px">
+          Slides:
+          <!-- TODO Create & change all non-Esri links to links.esri.com? -->
+          <a
+            href="https://shawnmgoulet.github.io/2024-dev-summit-arcgis-exb-building-your-first-widget/slides/"><code>https://shawnmgoulet.github.io/2024-dev-summit-arcgis-exb-building-your-first-widget/slides/</code></a>
+        </p>
+      </section>
+
+      <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          ## Agenda
+
+          - Intro to Experience Builder
+          - Installation
+          - Widget Location
+          - Widget Structure
+          - Sample Code
+        </script>
+      </section>
+
+
+      <!-- <section data-markdown data-background="img/2024/devsummit/3.jpg">
+        <script type="text/template">
+          ## Content Headline
+
+          Code block support:
+
+          ```js []
+          const hello = 'Hello';
+          const world = 'World';
+          alert(`${hello} ${world}!`);
+          ```
+        </script>
+      </section> -->
+
+      <section data-background="img/2024/devsummit/2.jpg">
+        <h2 style="text-align: left;">Intro to Experience Builder</h2>
+      </section>
+
+      <section data-background="img/2024/devsummit/2.jpg">
+        <h2>What is ArcGIS Experience Builder</h2>
+        <table>
+          <tr>
+            <td style="width: 50%">
+              <p>
+                ArcGIS Experience Builder empowers you to quickly transform
+                your data into compelling web apps and pages
+              </p>
+              <ul>
+                <li>Start with templates and widgets</li>
+                <li>Extensibility</li>
+              </ul>
+            </td>
+            <td>
+              <img style="vertical-align: top" src="img/exb-jsapi.png" />
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <section data-background="img/2024/devsummit/2.jpg">
+        <h2 style="opacity: 0.5;">ArcGIS Experience Builder Editions</h2>
+        <table>
+          <tr>
+            <td style="width: 50%; vertical-align: top">
+              <ul>
+                <li>ArcGIS Online and ArcGIS Enterprise</li>
+                <ul>
+                  <li><a href="http://experience.arcgis.com" target="_blank">experience.arcgis.com</a></li>
+                  <li>ArcGIS Enterprise 10.8.1 and above</li>
+                </ul>
+              </ul>
+              <br /><br /><br />
+              <br /><br /><br />
+              <ul>
+                <li>Developer Edition</li>
+                <ul>
+                  <li>
+                    <a href="https://developers.arcgis.com/experience-builder/guide/install-guide/"
+                      target="_blank">Download</a> from the Developers website and install locally
+                  </li>
+                  <li><a
+                      href="https://developers.arcgis.com/experience-builder/guide/install-guide/#install-as-a-windows-service"
+                      target="_blank">Install as a Windows Service</a> for team Experience Builder projects</li>
+                  <li>Sign in to ArcGIS Online / Enterprise</li>
+                </ul>
+              </ul>
+            </td>
+            <td style="text-align: center">
+              <img style="max-height: 400px" src="img/experience.arcgis.com.png" />
+              <img style="max-height: 400px" src="img/developers.arcgis.com.png" />
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- <section data-background="img/2024/devsummit/2.jpg">
+        <h2 style="text-align: right; opacity: 0.5;">Run developer edition</h2>
+      </section> -->
+
+      <!-- <section data-background="img/2024/devsummit/2.jpg">
+        <h2 style="text-align: right">Custom widgets</h2>
+      </section> -->
+
+      <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          <h2>Technologies</h2>
+
+          - React
+          - TypeScript
+          - Jimu (ArcGIS Maps SDK for JavaScript + Bootstrap + others)
+        </script>
+      </section>
+
+      <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          ## Experience Builder Technologies
+          ![](img/tech.png)
+        </script>
+      </section>
+
+      <section data-background="img/2024/devsummit/2.jpg">
+        <h2 style="text-align: left;">Installation</h2>
+      </section>
+
+      <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          <h2>Installation Process (connected environment)</h2>
+
+          - Download the developer edition from the <a href="https://developers.arcgis.com/experience-builder/guide/downloads/" target="_blank">Downloads page</a>
+          - Create a new Application item in ArcGIS Online or ArcGIS Enterprise
+          - Add `https://localhost:3001/` to the list of redirect URIs
+          - Copy the client ID from the Application item
+          - In the terminal, navigate to the developer edition of Experience Builder's `server` directory and run `npm ci && npm start`
+          - Open a web browser, navigate to `https://localhost:3001/`, enter the client ID you copied, and sign in
+          - In another terminal, navigate to the `client/` directory and run `npm ci && npm start`
+        </script>
+      </section>
+
+      <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          <h2>Installation Process (disconnected environment)</h2>
+
+          - Follow the steps in the <a href="https://developers.arcgis.com/experience-builder/guide/install-guide/#offline-install" target="_blank">offline install</a> section
+        </script>
+      </section>
+
+      <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          <h2>Installation Process (developing as a team)</h2>
+
+          - Follow the steps in the <a href="https://developers.arcgis.com/experience-builder/guide/install-guide/#install-as-a-windows-service" target="_blank">windows service install</a> section
+        </script>
+      </section>
+
+      <section data-background="img/2024/devsummit/2.jpg">
+        <h2 style="text-align: left;">Widget Location</h2>
+      </section>
+
+      <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          ## Widget location
+
+            - client/
+              - your-repo
+                - widgets/
+                  - custom-widget/
+              -your-extensions
+
+        </script>
+      </section>
+
+      <section data-background="img/2024/devsummit/2.jpg">
+        <h2 style="text-align: left;">Widget Structure</h2>
+      </section>
+
+       <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          ## Widget directory and file structure
+
+            - custom-widget/
+              - manifest.json && (config.ts || config.json)
+              - src/
+                - runtime/
+                  - widget.tsx
+                  - translations/
+                  - lib/ (subcomponents) || util/ (utility) || assets/ (stylesheet(s))
+                - setting/
+                  - setting.tsx
+                  - translations/
+        </script>
+      </section>
+
+            <section data-markdown data-background="img/2024/devsummit/2.jpg">
+              <script type="text/template">
+                      ## Widget as a web extension repo
+            
+                      - my-web-extension-repo/
+                        - manifest.json
+                        - themes/
+                        - widgets/
+                            - my-custom-widget/
+                    </script>
+            </section>
+
+      
+      <!--
+            <section data-markdown data-background="img/2024/devsummit/2.jpg">
+              <script type="text/template">
+                More info:
+
+                [developers.arcgis.com/experience-builder/guide/getting-started-widget](https://developers.arcgis.com/experience-builder/guide/getting-started-widget)
+              </script>
+            </section>
+      -->
+
+      <section data-background="img/2024/devsummit/2.jpg">
+        <h2 style="text-align: left;">Sample Code</h2>
+      </section>
+
+      <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          ## Sample code resources
+
+          - [Documentation](https://developers.arcgis.com/experience-builder/sample-code/)
+          - [GitHub Repository](https://github.com/esri/arcgis-experience-builder-sdk-resources)
+          - [Demo functional component widget](https://developers.arcgis.com/experience-builder/sample-code/widgets/demo-function/)
+        </script>
+      </section>
+
+      <section data-markdown data-background="img/2024/devsummit/2.jpg">
+        <script type="text/template">
+          ## Resources
+
+          |  |  |
+          | --- | --- |
+          | Code from presentation | [code](https://links.esri.com/2024-fed-uc-arcgis-exb-for-devs) |
+          | Experience Builder developer documentation | [developers.arcgis.com/experience-builder](https://developers.arcgis.com/experience-builder/) |
+          | Esri Community: Experience Builder | [community.esri.com/t5/arcgis-experience-builder/ct-p/arcgis-experience-builder](https://community.esri.com/t5/arcgis-experience-builder/ct-p/arcgis-experience-builder) |
+        </script>
+      </section>
+
+      <!-- SOCIAL CONNECT SLIDE: -->
+      <section data-background="img/2024/devsummit/6.jpg">
+        <h2 style="text-align: left">Connect With Us On Social</h2>
+        <p style="text-align: left; color: var(--r-section-subhead-color)">
+          And Join the Conversation Using #DevSummit
+        </p>
+        <ul style="
+                  text-align: left;
+                  display: inline;
+                  list-style-type: none;
+                  line-height: 4rem;
+                ">
+          <li>
+            <img src="img/2024/devsummit/twitter.png"
+              style="height: 50px; vertical-align: middle; margin-right: 15px" />
+            <a href="https://twitter.com/EsriDevs">twitter.com/EsriDevs</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #EsriDevSummit2024
+
+          </li>
+          <li>
+            <img src="img/2024/devsummit/twitter.png"
+              style="height: 50px; vertical-align: middle; margin-right: 15px" />
+            <a href="https://twitter.com/EsriDevEvents">twitter.com/EsriDevEvents</a>
+          </li>
+          <li>
+            <img src="img/2024/devsummit/youtube.png"
+              style="height: 50px; vertical-align: middle; margin-right: 15px" />
+            <a href="http://www.youtube.com/@EsriDevs">youtube.com/@EsriDevs</a>
+          </li>
+          <li>
+            <img src="img/2024/devsummit/video.png" style="height: 50px; vertical-align: middle; margin-right: 15px" />
+            <a href="https://links.esri.com/DevVideos">links.esri.com/DevVideos</a>
+          </li>
+          <li>
+            <img src="img/2024/devsummit/github.png" style="height: 50px; vertical-align: middle; margin-right: 15px" />
+            <a href="https://github.com/Esri">github.com/Esri</a>
+          </li>
+          <li>
+            <img src="img/2024/devsummit/github.png" style="height: 50px; vertical-align: middle; margin-right: 15px" />
+            <a href="https://github.com/EsriDevEvents">github.com/EsriDevEvents</a>
+          </li>
+          <li>
+            <img src="img/2024/devsummit/community.png"
+              style="height: 50px; vertical-align: middle; margin-right: 15px" />
+            <a href="https://links.esri.com/EsriDevCommunity">links.esri.com/EsriDevCommunity</a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- FEEDBACK SLIDE: -->
+      <section data-markdown data-background="img/2024/devsummit/7.jpg"></section>
+
+      <!-- PRINT CERTIFICATE SLIDE: -->
+      <!-- <section data-markdown data-background="img/2024/devsummit/7.jpg" data-background-size="contain"></section> -->
+
+      <!-- ESRI LOGO SLIDE: -->
+      <section data-markdown data-background="img/2024/devsummit/8.jpg" data-background-size="contain"></section>
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // This is the standard for the Esri event projectors - if it's not 
+      // working correctly for you or not working great for printing, 
+      // remove these two lines:
+      width: 1920,
+      height: 1080,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>
